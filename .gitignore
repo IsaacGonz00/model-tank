@@ -3,6 +3,12 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Local app data
+data/
+
+# Local databases
+*.db
+
 # C extensions
 *.so
 
