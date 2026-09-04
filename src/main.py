@@ -19,7 +19,7 @@ if openai_api_key is None:
 # Initializing the OpenAI client with the API key
 client = OpenAI(api_key = openai_api_key)
 
-# Starting a loop to continuously receive user input and print it back until the user types "exit"
+# Starting a loop to continuously receive user input and adhere to the commands provided by the user, until the user types "exit"
 while True:
     user_message = input("User: ")
     command = user_message.lower()
@@ -33,11 +33,17 @@ while True:
     elif command == "date":
         current_date = datetime.now().strftime("%m/%d/%y")
         print("The Current Date is:", current_date)
+    elif command == "take note":
+        note = input("Please enter your note: ")
+        with open("data/notes.txt", "a") as file:
+            file.write(note + "\n")
+        print("Note saved.")
     elif command == "help":
         print("Available Commands:")
         print("1. time - Displays the current time.")
         print("2. date - Displays the current date.")
-        print("3. help - Displays this help message.")
-        print("4. exit - Exits the program.")
+        print("3. take note - Allows you to save a note.")
+        print("4. help - Displays this help message.")
+        print("5. exit - Exits the program.")
     else:
         print("Model Tank Received:", user_message)
