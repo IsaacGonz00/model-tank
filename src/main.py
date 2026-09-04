@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -20,9 +22,13 @@ client = OpenAI(api_key = openai_api_key)
 # Starting a loop to continuously receive user input and print it back until the user types "exit"
 while True:
     user_message = input("User: ")
-    
-    if user_message.lower() == "exit":
+    command = user_message.lower()
+
+    if command == "exit":
         print("Model Tank Shutting Down...")
         break
-
-    print("Model Tank Received:", user_message)
+    elif command == "time":
+        current_time = datetime.now().strftime("%I:%M:%S %p")
+        print("The Current Time is:", current_time)
+    else:
+        print("Model Tank Received:", user_message)
