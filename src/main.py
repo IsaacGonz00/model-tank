@@ -30,5 +30,14 @@ while True:
     elif command == "time":
         current_time = datetime.now().strftime("%I:%M:%S %p")
         print("The Current Time is:", current_time)
+    elif command == "date":
+        current_date = datetime.now().strftime("%m/%d/%y")
+        print("The Current Date is:", current_date)
+    elif command == "help":
+        print("Available Commands:")
+        print("1. time - Displays the current time.")
+        print("2. date - Displays the current date.")
+        print("3. help - Displays this help message.")
+        print("4. exit - Exits the program.")
     else:
         print("Model Tank Received:", user_message)
