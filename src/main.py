@@ -17,6 +17,12 @@ if openai_api_key is None:
 # Initializing the OpenAI client with the API key
 client = OpenAI(api_key = openai_api_key)
 
-# Checking to see if Model Tank is echoing user input
-user_message = input("User: ")
-print("Model Tank Received:", user_message)
+# Starting a loop to continuously receive user input and print it back until the user types "exit"
+while True:
+    user_message = input("User: ")
+    
+    if user_message.lower() == "exit":
+        print("Model Tank Shutting Down...")
+        break
+
+    print("Model Tank Received:", user_message)
