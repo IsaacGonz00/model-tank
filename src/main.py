@@ -45,15 +45,16 @@ def takeNote():
             file.write(note + "\n")
 
 def showNotes():
-    if os.path.exists("data/notes.txt"):
+    try:
         with open("data/notes.txt", "r") as file:
             notes = file.readlines()
-            if notes:
-                print("Your Notes:")
-                for idx, note in enumerate(notes, start=1):
-                    print(f"{idx}. {note.strip()}")
-            else:
-                print("No notes found.")
+    except FileNotFoundError:
+        print("File has not been created yet. Please take a note first.")
+        return
+    if notes:
+        print("Your Notes:")
+        for idx, note in enumerate(notes, start=1):
+            print(f"{idx}. {note.strip()}")
     else:
         print("No notes found.")
 
