@@ -32,24 +32,27 @@ while True:
     print("Model Tank ready.")
     print('Type "help" for commands.')
     user_message = input("User: ")
-    command = user_message.lower()
-
+    command = " ".join(user_message.lower().split())
 
     command_dict = {
-        #"exit": commands.exitProgram,
+        "exit": commands.exitProgram,
         "time": commands.showTime,
         "date": commands.showDate,
         "clear": commands.clearScreen,
         "help": commands.displayHelp,
+
         "take note": notes.takeNote,
-        "show notes": notes.showNotes
+        "take notes": notes.takeNote,
+        "make a note": notes.takeNote,
+
+        "show notes": notes.showNotes,
+        "show my notes": notes.showNotes,
+        "show notes": notes.showNotes,
+
     }
    
     # Handling user commands
-    if command == "exit":
-        commands.exitProgram()
-
-    elif command in command_dict:
+    if command in command_dict:
         command_dict[command]()
 
     else:
