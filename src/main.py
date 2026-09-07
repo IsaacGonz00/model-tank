@@ -23,7 +23,55 @@ if openai_api_key is None:
 client = OpenAI(api_key = openai_api_key)
 ##################################################################################################################
 
-# Starting a loop to continuously receive user input and adhere to the commands provided by the user, until the user types "exit"
+# Functions
+def exitProgram():
+    print("Model Tank Shutting Down...")
+    exit()
+
+def showTime():
+    current_time = datetime.now().strftime("%I:%M:%S %p")
+    print("The Current Time is:", current_time) 
+
+def showDate():
+    current_date = datetime.now().strftime("%m/%d/%y")
+    print("The Current Date is:", current_date)
+
+def takeNote():
+    note = input("Please enter your note: ")
+    with open("data/notes.txt", "a") as file:
+        file.write(note + "\n")
+    print("Note saved.")
+
+def showNotes():
+    if os.path.exists("data/notes.txt"):
+        with open("data/notes.txt", "r") as file:
+            notes = file.readlines()
+            if notes:
+                print("Your Notes:")
+                for idx, note in enumerate(notes, start=1):
+                    print(f"{idx}. {note.strip()}")
+            else:
+                print("No notes found.")
+    else:
+        print("No notes found.")
+
+def clearScreen():
+    os.system("clear")
+
+def displayHelp():
+    print("Available Commands:")
+    print("1. time - Displays the current time.")
+    print("2. date - Displays the current date.")
+    print("3. take note - Allows you to save a note.")
+    print("4. show notes - Displays all saved notes.")
+    print("5. help - Displays this help message.")
+    print("6. clear - Clears the terminal screen.")
+    print("7. exit - Exits the program.")
+
+
+
+
+# Starting a loop to continuously receive user input and adhere to the commands provided by the user
 while True:
 
     print("--------------------------------")
@@ -33,55 +81,26 @@ while True:
     command = user_message.lower()
 
     # Handling user commands
-    # command: exit - Exits the program
     if command == "exit":
-        print("Model Tank Shutting Down...")
-        break
+        exitProgram()
 
-    # command: time - Displays the current time
     elif command == "time":
-        current_time = datetime.now().strftime("%I:%M:%S %p")
-        print("The Current Time is:", current_time)
+        showTime()
 
-    # command: date - Displays the current date
     elif command == "date":
-        current_date = datetime.now().strftime("%m/%d/%y")
-        print("The Current Date is:", current_date)
+        showDate()
 
-    # command: take note - Allows you to save a note
     elif command == "take note":
-        note = input("Please enter your note: ")
-        with open("data/notes.txt", "a") as file:
-            file.write(note + "\n")
-        print("Note saved.")
+        takeNote()
 
-    # command: show notes - Displays all saved notes
     elif command == "show notes":
-        if os.path.exists("data/notes.txt"):
-            with open("data/notes.txt", "r") as file:
-                notes = file.readlines()
-                if notes:
-                    print("Your Notes:")
-                    for idx, note in enumerate(notes, start=1):
-                        print(f"{idx}. {note.strip()}")
-                else:
-                    print("No notes found.")
-        else:
-            print("No notes found.")
+        showNotes()
 
-    # command: clear - Clears the terminal screen
     elif command == "clear":
-            os.system("clear")
+        clearScreen()
 
-    # command: help - Displays a list of available commands
     elif command == "help":
-        print("Available Commands:")
-        print("1. time - Displays the current time.")
-        print("2. date - Displays the current date.")
-        print("3. take note - Allows you to save a note.")
-        print("4. show notes - Displays all saved notes.")
-        print("5. help - Displays this help message.")
-        print("6. clear - Clears the terminal screen.")
-        print("7. exit - Exits the program.")
+        displayHelp()
+      
     else:
         print("Model Tank Received:", user_message)
