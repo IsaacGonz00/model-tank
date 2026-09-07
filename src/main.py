@@ -38,9 +38,11 @@ def showDate():
 
 def takeNote():
     note = input("Please enter your note: ")
-    with open("data/notes.txt", "a") as file:
-        file.write(note + "\n")
-    print("Note saved.")
+    if note.strip() == "":
+        print("Empty note not saved.")
+    else:
+        with open("data/notes.txt", "a") as file:
+            file.write(note + "\n")
 
 def showNotes():
     if os.path.exists("data/notes.txt"):
