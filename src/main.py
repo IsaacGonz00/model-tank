@@ -8,7 +8,8 @@ from openai import OpenAI
 # Indicating that Model Tank is initializing
 print("Model Tank initializing...")
 
-##################################################################################################################
+####################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################
 # AI Model Initialization Template for now, this is a placeholder for future AI model initialization code.
 load_dotenv()
 
@@ -21,7 +22,8 @@ if openai_api_key is None:
 
 # Initializing the OpenAI client with the API key
 client = OpenAI(api_key = openai_api_key)
-##################################################################################################################
+####################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################
 
 # Starting a loop to continuously receive user input and adhere to the commands provided by the user
 while True:
@@ -32,27 +34,23 @@ while True:
     user_message = input("User: ")
     command = user_message.lower()
 
+
+    command_dict = {
+        #"exit": commands.exitProgram,
+        "time": commands.showTime,
+        "date": commands.showDate,
+        "clear": commands.clearScreen,
+        "help": commands.displayHelp,
+        "take note": notes.takeNote,
+        "show notes": notes.showNotes
+    }
+   
     # Handling user commands
     if command == "exit":
         commands.exitProgram()
 
-    elif command == "time":
-        commands.showTime()
-
-    elif command == "date":
-        commands.showDate()
-
-    elif command == "take note":
-        notes.takeNote()
-
-    elif command == "show notes":
-        notes.showNotes()
-
-    elif command == "clear":
-        commands.clearScreen()
-
-    elif command == "help":
-        commands.displayHelp()
+    elif command in command_dict:
+        command_dict[command]()
 
     else:
         print("Model Tank Received:", user_message)
