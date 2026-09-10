@@ -1,11 +1,31 @@
-import tkinter as tk
-from tkinter import ttk
+# Model Tank Pygame UI
+# Reference: Pygame Documentation
+# https://www.pygame.org/docs/
 
-root = tk.Tk()
-root.title("My Application")
-root.geometry("640x480")
-root.minsize(320, 240)
+# Example file showing a basic pygame "game loop"
+import pygame
 
-ttk.Label(root, text="Hello").pack(padx=40, pady=40)
+# pygame setup
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+running = True
 
-root.mainloop()
+while running:
+    # poll for events
+    # pygame.QUIT event means the user clicked X to close your window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill("black")
+
+    # RENDER YOUR GAME HERE
+
+    # flip() the display to put your work on screen
+    pygame.display.flip()
+
+    clock.tick(60)  # limits FPS to 60
+
+pygame.quit()
